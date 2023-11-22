@@ -1,0 +1,109 @@
+@startuml name 
+
+title Software Engineering UML Diagram
+skin rose
+
+class Dozent {
+  -AvailableTimes availableTimes
+  -void setAvailability(Date, Availability)
+  +void teachCourse(Course)
+  +void holdExam(Exam)
+  +Availability isAvailable(Date)
+}
+
+class Examiner extends Dozent {
+  +Exam createExam(course, starttime, endtime, prof1, prof2)
+  +Exam[] checkRegistrationsFromStudent(Student)
+  +void changeExaminer(exam, prof1, prof2)
+  +void changeExamStatus(exam, ExamStatus)
+  +void archiveExam(exam)
+}
+
+class GuestProfessor extends Dozent {}
+class Lecturer extends Dozent {}
+class TeacherForSpecialTasks extends Dozent {}
+
+class Student {
+  -string studentId
+  +void visitCourse(Course)
+  +void toggleRegistrationForExam(Exam)
+  +void takeExam(Exam)
+  +string getStudentId()
+}
+
+class Exam {
+  -Course course
+  -Date starttimeOfExam
+  -Date endtimeOfExam
+  -Examiner prof1
+  -Examiner prof2
+  -Student[] participants
+  -ExamStatus status
+  +Availability[] getAvailability()
+  +Date getStarttime()
+  +Date getEndtime()
+  +Student[] getParticipants()
+  +ExamStatus getStatus()
+  +Course getCourse()
+  +void changeRegistrationStatus(Student)
+  +void changeExaminers(Examiner, Examiner)
+  +void changeExamStatus(ExamStatus)
+}
+
+class ExamArchive {
+  -ExamArchiveInterface allExams
+  +void registerExam(Exam)
+  +Exam[] getExamsFromStudent(Student)
+  +ExamArchiveInterface getAllExams()
+  +void registerStudentToExamArchive()
+}
+
+class StudentArchive {
+  -Student[] students
+  +void addStudent(Student)
+  +void removeStudent(Student)
+  +Student getStudentFromId(string)
+  +Student[] getAllStudents()
+}
+
+class Presentation extends Exam {}
+class WrittenExam extends Exam {}
+
+class Course {
+  -Examiner[] examiners
+  -Exam[] exams
+  +Examiner[] getExaminers()
+  +Exam[] getExams()
+}
+
+enum Availability {
+  +Available
+  +NotAvailable
+  +Unsure
+}
+
+enum ExamStatus {
+  +Pending
+  +InProgress
+  +Finished
+  +Archived
+}
+
+interface AvailableTimes {
+  Date: Availability
+}
+
+interface ExamArchiveInterface {
+  studentId: Exam
+}
+
+Student "0..n" -up-> "0..n" Course: visit
+Student "0..n" -up-> "0..n" WrittenExam: take
+Student "1" -up-> "0..n" Presentation: hold
+Student "0..n" --> "1" Exam: register
+Examiner "1..n" -down-> "0..n" Course: teach
+Examiner "1..2" -down-> "0..n" Exam: create
+Exam "0..n" -left-* "1" Course: has
+Exam "0..n" --> "1" ExamArchive: is included in
+
+@enduml

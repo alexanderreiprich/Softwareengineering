@@ -1,0 +1,24 @@
+@startuml name 
+
+skin rose 
+
+title "UML Sequence Diagram"
+
+actor Professor
+actor Student
+entity Exam
+entity Course
+database ExamArchive
+
+Professor -> Course : Hold Course
+Student -> Course : Visit Course
+Professor -> Exam : Create Exam
+Student -> Exam : Register for Exam
+Professor -> Exam : Change Examiner
+Student -> Exam : Take Exam
+Professor -> Exam : Change Exam Status
+Professor -> ExamArchive : Archive Exam
+Student -> ExamArchive : Get archived Exams
+Student -> Professor : Complain to Professor
+
+@enduml

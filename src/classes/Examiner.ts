@@ -5,8 +5,8 @@ import { Student } from "./Student";
 import { ExamStatus } from "./ExamStatus";
 import { archive } from "../main";
 export class Examiner extends Dozent {
-  public createExam(
-    course: Course,
+  public createExam( 
+    course: Course, 
     starttime: Date,
     endtime: Date,
     prof1: Examiner,

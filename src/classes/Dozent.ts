@@ -4,6 +4,7 @@ import { Course } from "./Course";
 import { Exam } from "./Exam";
 import { ExamStatus } from "./ExamStatus";
 export class Dozent {
+
   private availableTimes: AvailableTimes = {};
 
   private setAvailability(date: Date, availability: Availability): void {

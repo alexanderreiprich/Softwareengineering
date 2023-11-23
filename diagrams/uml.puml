@@ -89,6 +89,11 @@ enum ExamStatus {
   +Archived
 }
 
+enum WaitinglistMethod {
+  +Random
+  +Direct
+}
+
 interface AvailableTimes {
   Date: Availability
 }

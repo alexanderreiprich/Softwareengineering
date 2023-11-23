@@ -6,6 +6,7 @@ import { Student } from "./classes/Student";
 import { Examiner } from "./classes/Examiner";
 import { Course } from "./classes/Course";
 import { ExamStatus } from "./classes/ExamStatus";
+import { ApplicationMethod } from "./classes/ApplicationMethod";
 
 export let archive: ExamArchive = new ExamArchive();
 export let students: StudentArchive = new StudentArchive();
@@ -15,7 +16,7 @@ let student1: Student = new Student();
 let student2: Student = new Student();
 let prof1: Examiner = new Examiner();
 let prof2: Examiner = new Examiner();
-let course: Course = new Course();
+let course: Course = new Course(ApplicationMethod.DIRECT, 20);
 
 // Hold an example exam
 let exam: Exam = prof1.createExam(course, new Date(), new Date(), prof1, prof2);

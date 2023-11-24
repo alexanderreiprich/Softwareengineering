@@ -2,8 +2,8 @@ import { Dozent } from "./Dozent";
 import { Exam } from "./Exam";
 import { Course } from "./Course";
 import { Student } from "./Student";
-import { ExamStatus } from "./ExamStatus";
-import { archive } from "../main";
+import { ExamStatus } from "./enums/ExamStatus";
+import ExamArchive from "./singletons/ExamArchive";
 export class Examiner extends Dozent {
   public createExam( 
     course: Course, 
@@ -15,7 +15,7 @@ export class Examiner extends Dozent {
     return new Exam(course, starttime, endtime, prof1, prof2);
   }
   public checkRegistrationsFromStudent(student: Student): Exam[] {
-    return archive.getExamsFromStudent(student);
+    return ExamArchive.getExamsFromStudent(student);
   }
   public changeExaminer(exam: Exam, prof1: Examiner, prof2: Examiner): void {
     exam.changeExaminers(prof1, prof2);
@@ -24,6 +24,6 @@ export class Examiner extends Dozent {
     exam.changeExamStatus(examStatus);
   }
   public archiveExam(exam: Exam): void {
-    archive.registerExam(exam);
+    ExamArchive.registerExam(exam);
   }
 }

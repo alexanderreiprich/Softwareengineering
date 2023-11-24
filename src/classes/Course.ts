@@ -1,10 +1,10 @@
 import { Exam } from "./Exam";
 import { Student } from "./Student";
-import { students } from "../main";
-import { CourseStatus } from "./CourseStatus";
+import StudentArchive from "./singletons/StudentArchive";
+import { CourseStatus } from "./enums/CourseStatus";
 import { Dozent } from "./Dozent";
-import { ApplicationMethod } from "./ApplicationMethod";
-import { WaitinglistMethod } from "./WaitinglistMethod";
+import { ApplicationMethod } from "./enums/ApplicationMethod";
+import { WaitinglistMethod } from "./enums/WaitinglistMethod";
 
 export class Course {
   private teachers: Dozent[] = [];
@@ -34,7 +34,7 @@ export class Course {
   }
   public refreshParticipants(): void {
     let newParticipants: Student[] = [];
-    let allStudents: Student[] = students.getAllStudents();
+    let allStudents: Student[] = StudentArchive.getAllStudents();
     for (let i: number = 0; i < allStudents.length; i++) {
       if (allStudents[i].getCourses().indexOf(this) > -1) {
         newParticipants.push(allStudents[i]);

@@ -1,10 +1,23 @@
-import { Exam } from "./Exam";
-import { Student } from "./Student";
-import { ExamArchiveInterface } from "./ExamArchiveInterface";
-import { ExamStatus } from "./ExamStatus";
+import { Exam } from "../Exam";
+import { Student } from "../Student";
+import { ExamArchiveInterface } from "../interfaces/ExamArchiveInterface";
+import { ExamStatus } from "../enums/ExamStatus";
 
 export class ExamArchive {
-  private allExams: ExamArchiveInterface = {};
+  private allExams: ExamArchiveInterface;
+  private static instance: ExamArchive = new ExamArchive();
+
+  constructor() {
+    if (ExamArchive.instance) {
+      throw new Error("STOP");
+    }
+    ExamArchive.instance = this;
+    this.allExams = {};
+  }
+
+  public static getInstance(): ExamArchive {
+    return ExamArchive.instance;
+  }
 
   public registerExam(exam: Exam): void {
     let participants = exam.getParticipants();
@@ -24,3 +37,5 @@ export class ExamArchive {
     this.allExams[student.getStudentId()] = [];
   }
 }
+
+export default ExamArchive.getInstance();

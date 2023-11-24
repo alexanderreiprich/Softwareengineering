@@ -1,9 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StudentArchive = void 0;
 class StudentArchive {
     constructor() {
+        if (StudentArchive.instance) {
+            throw new Error("STOP");
+        }
+        StudentArchive.instance = this;
         this.students = [];
+    }
+    static getInstance() {
+        return StudentArchive.instance;
     }
     addStudent(student) {
         this.students.push(student);
@@ -23,5 +29,6 @@ class StudentArchive {
         return this.students;
     }
 }
-exports.StudentArchive = StudentArchive;
+StudentArchive.instance = new StudentArchive();
+exports.default = StudentArchive.getInstance();
 //# sourceMappingURL=StudentArchive.js.map

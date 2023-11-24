@@ -1,9 +1,9 @@
-import { Availability } from "./Availability";
-import { AvailableTimes } from "./AvailableTimes";
+import { Availability } from "./enums/Availability";
+import { AvailableTimes } from "./interfaces/AvailableTimes";
 import { Course } from "./Course";
-import { CourseStatus } from "./CourseStatus";
+import { CourseStatus } from "./enums/CourseStatus";
 import { Exam } from "./Exam";
-import { ExamStatus } from "./ExamStatus";
+import { ExamStatus } from "./enums/ExamStatus";
 import { Student } from "./Student";
 export class Dozent {
 

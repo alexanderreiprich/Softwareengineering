@@ -1,4 +1,4 @@
-import { Exam } from "./Exam"
+import { Exam } from "../Exam"
 
 export interface ExamArchiveInterface {
     [student: string]: Exam[];

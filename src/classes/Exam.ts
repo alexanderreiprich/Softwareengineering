@@ -1,8 +1,8 @@
 import { Course } from "./Course";
 import { Examiner } from "./Examiner";
 import { Student } from "./Student";
-import { Availability } from "./Availability";
-import { ExamStatus } from "./ExamStatus";
+import { Availability } from "./enums/Availability";
+import { ExamStatus } from "./enums/ExamStatus";
 
 export class Exam {
   private course: Course;

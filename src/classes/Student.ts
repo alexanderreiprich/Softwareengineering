@@ -1,20 +1,21 @@
 import { Exam } from "./Exam";
 import { Course } from "./Course";
-import { students, archive } from "../main";
-import { CourseStatus } from "./CourseStatus";
+import ExamArchive from "./singletons/ExamArchive";
+import StudentArchive from "./singletons/StudentArchive";
+import { CourseStatus } from "./enums/CourseStatus";
 export class Student {
   private studentId: string;
   private courses: Course[];
 
   constructor() {
     let id = Math.floor(Math.random() * 1000000).toString();
-    while (students.getStudentFromId(id) != undefined) {
+    while (StudentArchive.getStudentFromId(id) != undefined) {
       id = Math.floor(Math.random() * 1000000).toString();
     }
     this.studentId = id;
     this.courses = [];
-    students.addStudent(this);
-    archive.registerStudentToExamArchive(this);
+    StudentArchive.addStudent(this);
+    ExamArchive.registerStudentToExamArchive(this);
   }
 
   private registerForCourse(course: Course): void {

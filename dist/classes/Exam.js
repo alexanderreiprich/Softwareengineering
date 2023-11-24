@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Exam = void 0;
-const ExamStatus_1 = require("./ExamStatus");
+const ExamStatus_1 = require("./enums/ExamStatus");
 class Exam {
     constructor(course, starttimeOfExam, endtimeOfExam, prof1, prof2) {
         this.course = course;

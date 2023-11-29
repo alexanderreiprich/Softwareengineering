@@ -18,7 +18,8 @@ export class Student {
     ExamArchive.registerStudentToExamArchive(this);
   }
 
-  private registerForCourse(course: Course): void {
+  public registerForCourse(course: Course): void {
+    this.courses.push(course);
     if (course.getStatus() == CourseStatus.PENDING) {
       if (this.courses.indexOf(course) == -1) {
         // Application Process
@@ -26,7 +27,7 @@ export class Student {
       course.refreshParticipants();
     }
   }
-  private unregisterFromCourse(course: Course): void {
+  public unregisterFromCourse(course: Course): void {
     if (course.getStatus() != CourseStatus.PENDING) {
       this.courses.splice(this.courses.indexOf(course));
       course.refreshParticipants();

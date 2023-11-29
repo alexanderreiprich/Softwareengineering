@@ -8,6 +8,8 @@ class Dozent {
   -void setAvailability(Date, Availability)
   +void teachCourse(Course)
   +void holdExam(Exam)
+  +void changeTeachers(Course, Dozent[])
+  +boolean checkPrevCoursesOfStudents(Course, Courses[])
   +Availability isAvailable(Date)
 }
 
@@ -25,10 +27,14 @@ class TeacherForSpecialTasks extends Dozent {}
 
 class Student {
   -string studentId
+  -Course[] courses
+  +void registerForCourse(Course)
+  +void unregisterFromCourse(Course)
   +void visitCourse(Course)
   +void toggleRegistrationForExam(Exam)
   +void takeExam(Exam)
   +string getStudentId()
+  +Course[] getCourses()
 }
 
 class Exam {
@@ -71,9 +77,23 @@ class WrittenExam extends Exam {}
 
 class Course {
   -Examiner[] examiners
+  -Dozent[] teachers
+  -number maxParticipants
+  -Student[] participants
+  -Student[] applicants
+  -CourseStatus status 
+  -ApplicationMethod applicationMethod 
   -Exam[] exams
-  +Examiner[] getExaminers()
+  +Dozent[] getTeachers()
   +Exam[] getExams()
+  +Student[] getParticipants()
+  +CourseStatus getStatus()
+  +void refreshParticipants()
+  +void setTeachers(Dozent[])
+  +void setApplicationMethod(ApplicationMethod)
+  +Student[] chooseApplicantsDirectly(Student[])
+  +Student[] randomlyChooseApplicants()
+  
 }
 
 enum Availability {
@@ -94,6 +114,17 @@ enum WaitinglistMethod {
   +Direct
 }
 
+enum ApplicationMethod {
+  +Direct
+  +WaitingList
+}
+
+enum CourseStatus {
+  +Pending
+  +Started
+  +Finished
+}
+
 interface AvailableTimes {
   Date: Availability
 }
@@ -110,5 +141,7 @@ Examiner "1..n" -down-> "0..n" Course: teach
 Examiner "1..2" -down-> "0..n" Exam: create
 Exam "0..n" -left-* "1" Course: has
 Exam "0..n" --> "1" ExamArchive: is included in
+Student "0..n" --> "1" StudentArchive: is included in
+
 
 @enduml
